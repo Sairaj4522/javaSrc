@@ -1,0 +1,39 @@
+<project name="Java Source Directory" default="compile" basedir=".">
+
+<!-- The directory containing source code -->
+<property name="src.dir" value="src/main/java"/>
+
+<!-- Temporary build directories -->
+<property name="build.dir" value="build"/>
+<property name="build.classes" value="${build.dir}/classes" >
+<property name="build.lib" value="${build.dir}/lib">
+
+<!-- Specify the compiler to use. -->
+<property name="build.compiler" value="modern"/>
+
+<!-- Target to create the build directories prior to the -->
+<!-- compile target. -->
+<target name="init">
+	<!-- Create a time stamp -->
+	<tstamp/>
+	<!-- Create the build directory structure used by compile -->
+	<mkdir dir="${build.dir}"/>
+	<mkdir dir="${build.classes}"/>
+	<mkdir dir="${build.lib}"/>
+</target>
+<target name="clean" description="Removes all generated files.">
+	<delete dir="${build.dir}">
+</target>
+
+<target name="compile" depends="init" description="Compiles all source code.">
+	
+	<!-- Compile the java code from ${src.dir} into ${build.dir} -->
+	<javac srcdir="${src.dir}" destdir="${build}" deprecation="true" classpath="$CLASSPATH" includeantruntime="true" debug="true"/>
+</target>
+<target name="regress" depends="compile">
+	<junit>
+		<test name="PersonTest"/>
+	</junit>
+</target>
+
+</project>
