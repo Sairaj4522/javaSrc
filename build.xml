@@ -28,12 +28,17 @@
 <target name="compile" depends="init" description="Compiles all source code.">
 	
 	<!-- Compile the java code from ${src.dir} into ${build.dir} -->
-	<javac srcdir="${src.dir}" destdir="${build}" deprecation="true" classpath="$CLASSPATH" includeantruntime="true" debug="true"/>
+	<javac srcdir="${src.dir}" destdir="${build.classes}" debug="true"/>
+</target>
+
+<target name="jar" depends="compile" description="Generates jSrc.jar in the 'dist' directory.">
+	<!-- Exclude unit tests from the final JAR file -->
+	<jar jarfile="${build.lib}/jSrc.jar" basedir="${build.classes}" excludes="**/Test.class"/>
 </target>
 <target name="regress" depends="compile">
 	<junit>
 		<test name="PersonTest"/>
 	</junit>
 </target>
-
+<target name="all" depends="clean,jar" description="Cleans, compiles then builds the JAR file."/>
 </project>
