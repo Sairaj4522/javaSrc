@@ -7,6 +7,7 @@ import org.junit.Ignore;
 
 import testing.FirstDayAtSchool;
 
+
 public class FirstDayAtSchoolTest {
 
 	FirstDayAtSchool school = new FirstDayAtSchool();
@@ -19,7 +20,6 @@ public class FirstDayAtSchoolTest {
 		assertArrayEquals(bag1, school.prepareMyBag());
 	}
 
-	@Ignore
 	@Test
 	public void testAddPencils(){
 		System.out.println("Inside testAddPencils()");
